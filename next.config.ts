@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'standalone', // Ensures it creates a single deployable build
+  distDir: 'build',     // Sets the output directory to './build'
 };
 
-export default nextConfig;
+module.exports = nextConfig;

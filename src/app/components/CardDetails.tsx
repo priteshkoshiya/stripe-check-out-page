@@ -75,11 +75,6 @@ const CardDetails = () => {
         }
     }, [cardNumber, expiryDate, email, cvc, cardholderName, showForm, isFormTouched]);
 
-    const handleInputChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        setter(e.target.value);
-        setIsFormTouched(true);
-    };
-
     const handleExpiryDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let value = e.target.value.replace(/\D/g, '');
         if (value.length > 2) {
@@ -94,7 +89,7 @@ const CardDetails = () => {
         setIsFormTouched(true);
         if (validateForm()) {
             console.log('cardNumber', cardNumber);
-            const { data, error } = await supabase.from('payment_details').insert([{ name: cardholderName, email: email, card_number: cardNumber, expiry_date: expiryDate }]).select();
+            const { error } = await supabase.from('payment_details').insert([{ name: cardholderName, email: email, card_number: cardNumber, expiry_date: expiryDate }]).select();
             console.log('error', error);
             if (error) {
                 alert("Error: " + error.message);
